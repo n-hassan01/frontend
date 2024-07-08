@@ -1,8 +1,39 @@
+import { useEffect, useState } from "react";
 // import content
-import { useEffect } from "react";
-import { content } from "../Content";
+import Hero_person from "../assets/images/Hero/naimul2.png";
+// api services
+import { getHeroPageInfoService } from "../Services/apiServices";
+
 const Hero = () => {
-  const { hero } = content;
+  const [pageInfo, setPageInfo] = useState({});
+  useEffect(() => {
+    getHeroPageInfoService()
+      .then((response) => {
+        setPageInfo(response.data.data[0]);
+      })
+      .catch((error) => {
+        console.error("Error fetching account details:", error);
+      });
+  }, []);
+  console.log(pageInfo);
+
+  const hero = {
+    title: pageInfo.designation || "",
+    firstName: pageInfo.heroCompositeKey?.firstName || "", // Using optional chaining
+    lastName: pageInfo.heroCompositeKey?.lastName || "", // Using optional chaining
+    btnText: "Hire Me",
+    image: Hero_person,
+    hero_content: [
+      {
+        count: pageInfo.experienceCount || 0,
+        text: pageInfo.experienceDescription || "",
+      },
+      {
+        count: pageInfo.projectCount || 0,
+        text: pageInfo.projectDescription || "",
+      },
+    ],
+  };
 
   return (
     <section id="home" className="overflow-hidden">
@@ -12,15 +43,15 @@ const Hero = () => {
           data-aos-delay="1200"
           className="absolute h-full md:w-4/12 w-8/12 top-0 right-0 bg-primaryLinear bottom-0 -z-10"
         >
-          <h1 className="rotate-90 absolute top-[30%] right-[-15%] text-[#EAF2FA]">
+          <h1 className="rotate-90 absolute top-[40%] right-[-15%] text-[#EAF2FA]">
             {hero.firstName}{" "}
-            <span className="text-dark_primary">{hero.LastName}</span>
+            <span className="text-dark_primary">{hero.lastName}</span>
           </h1>
         </div>
 
         {/* first col */}
         <div className="pb-16 px-6 pt-5" data-aos="fade-down">
-          <h2>{hero.title}</h2>
+          <h2>{pageInfo.designation}</h2>
           <br />
           <div className="flex justify-end">
             <button className="btn">{hero.btnText}</button>
