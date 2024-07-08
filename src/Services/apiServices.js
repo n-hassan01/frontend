@@ -36,3 +36,13 @@ export const getHeroPageInfoService = async () => {
     return err.message;
   }
 };
+
+export const getServicesPageInfoService = async () => {
+  try {
+    return await axiosInstance.get("services/all");
+  } catch (err) {
+    console.log(err.message);
+
+    return err.message;
+  }
+};
