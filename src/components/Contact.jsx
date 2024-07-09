@@ -1,7 +1,6 @@
 import emailjs from "@emailjs/browser";
 import { createElement, useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { content } from "../Content";
 // import icons from react-icons
 // import { BiUser } from "react-icons/bi";
 import { BsInstagram } from "react-icons/bs";
@@ -14,7 +13,6 @@ import { MdCall, MdOutlineFacebook } from "react-icons/md";
 import { getContactPageInfoService } from "../Services/apiServices";
 
 const Contact = () => {
-  const { Contact } = content;
   const form = useRef();
 
   // Sending Email
@@ -53,7 +51,6 @@ const Contact = () => {
         console.error("Error fetching account details:", error);
       });
   }, []);
-  console.log(pageInfo);
 
   const contact = {
     title: pageInfo.pageInfo?.title || "",
@@ -61,7 +58,6 @@ const Contact = () => {
     social_media: pageInfo.contentInfo || [],
   };
 
-  // if(contact.social_media)
   let updatedIcons = contact.social_media.map((media) => {
     if (media.icon === "email") {
       media.icon = GrMail;
@@ -83,7 +79,6 @@ const Contact = () => {
     }
     return media;
   });
-  console.log(updatedIcons);
 
   return (
     <section className="bg-dark_primary text-white" id="contact">

@@ -56,3 +56,13 @@ export const getContactPageInfoService = async () => {
     return err.message;
   }
 };
+
+export const getHiremePageInfoService = async () => {
+  try {
+    return await axiosInstance.get("hireme/all");
+  } catch (err) {
+    console.log(err.message);
+
+    return err.message;
+  }
+};

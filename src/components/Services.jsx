@@ -15,7 +15,6 @@ const Services = () => {
         console.error("Error fetching account details:", error);
       });
   }, []);
-  console.log(pageInfo);
 
   const title = pageInfo[0]?.pageTitle || "";
   const subtitle = pageInfo[0]?.pageSubtitle || "";
