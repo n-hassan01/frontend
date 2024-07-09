@@ -17,14 +17,17 @@ const Services = () => {
   }, []);
   console.log(pageInfo);
 
+  const title = pageInfo[0]?.pageTitle || "";
+  const subtitle = pageInfo[0]?.pageSubtitle || "";
+
   return (
     <section id="services">
       <div className="md:container px-5 py-14">
         <h2 className="title" data-aos="fade-down">
-          {pageInfo[0].pageTitle}
+          {title}
         </h2>
         <h4 className="subtitle" data-aos="fade-down">
-          {pageInfo[0].pageSubtitle}
+          {subtitle}
         </h4>
         <br />
         <div className="flex gap-5 justify-between flex-wrap group">
@@ -36,6 +39,7 @@ const Services = () => {
               className="min-w-[14rem] duration-300 cursor-pointer border-2 border-slate-200 rounded-xl text-center bg-bg_light_primary p-6 flex-1 group-hover:blur-sm 
               hover:!blur-none"
               // >
+              style={{ maxHeight: "600px", overflow: "auto " }}
             >
               {/* <img src={content.logo} alt="..." className="mx-auto" /> */}
               <img src={services_logo1} alt="..." className="mx-auto" />

@@ -1,7 +1,17 @@
-import { createElement, useRef } from "react";
-import { content } from "../Content";
 import emailjs from "@emailjs/browser";
+import { createElement, useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { content } from "../Content";
+// import icons from react-icons
+// import { BiUser } from "react-icons/bi";
+import { BsInstagram } from "react-icons/bs";
+import { FaLinkedin, FaTwitter } from "react-icons/fa";
+import { GrMail } from "react-icons/gr";
+import { MdCall, MdOutlineFacebook } from "react-icons/md";
+// import { RiProjectorLine, RiServiceLine } from "react-icons/ri";
+// import { TbSmartHome } from "react-icons/tb";
+// api services
+import { getContactPageInfoService } from "../Services/apiServices";
 
 const Contact = () => {
   const { Contact } = content;
@@ -13,7 +23,10 @@ const Contact = () => {
 
     emailjs
       .sendForm(
-      'YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form.current, 'YOUR_PUBLIC_KEY'
+        "YOUR_SERVICE_ID",
+        "YOUR_TEMPLATE_ID",
+        form.current,
+        "YOUR_PUBLIC_KEY"
       )
       .then(
         (result) => {
@@ -30,15 +43,57 @@ const Contact = () => {
       );
   };
 
+  const [pageInfo, setPageInfo] = useState({});
+  useEffect(() => {
+    getContactPageInfoService()
+      .then((response) => {
+        setPageInfo(response.data.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching account details:", error);
+      });
+  }, []);
+  console.log(pageInfo);
+
+  const contact = {
+    title: pageInfo.pageInfo?.title || "",
+    subtitle: pageInfo.pageInfo?.subtitle || "",
+    social_media: pageInfo.contentInfo || [],
+  };
+
+  // if(contact.social_media)
+  let updatedIcons = contact.social_media.map((media) => {
+    if (media.icon === "email") {
+      media.icon = GrMail;
+    }
+    if (media.icon === "phone") {
+      media.icon = MdCall;
+    }
+    if (media.icon === "instagram") {
+      media.icon = BsInstagram;
+    }
+    if (media.icon === "linekedin") {
+      media.icon = FaLinkedin;
+    }
+    if (media.icon === "facebook") {
+      media.icon = MdOutlineFacebook;
+    }
+    if (media.icon === "twitter") {
+      media.icon = FaTwitter;
+    }
+    return media;
+  });
+  console.log(updatedIcons);
+
   return (
     <section className="bg-dark_primary text-white" id="contact">
       <Toaster />
       <div className="md:container px-5 py-14">
         <h2 className="title !text-white" data-aos="fade-down">
-          {Contact.title}
+          {contact.title}
         </h2>
         <h4 className="subtitle" data-aos="fade-down">
-          {Contact.subtitle}
+          {contact.subtitle}
         </h4>
         <br />
         <div className="flex gap-10 md:flex-row flex-col">
@@ -78,7 +133,7 @@ const Contact = () => {
             </button>
           </form>
           <div className="flex-1 flex flex-col gap-5">
-            {Contact.social_media.map((content, i) => (
+            {contact.social_media.map((content, i) => (
               <div
                 key={i}
                 data-aos="fade-down"
@@ -86,8 +141,12 @@ const Contact = () => {
                 className="flex items-center gap-2"
               >
                 <h4 className="text-white">{createElement(content.icon)}</h4>
-                <a className="font-Poppins" href={content.link} target="_blank">
-                  {content.text}
+                <a
+                  className="font-Poppins"
+                  href={content.description}
+                  target="_blank"
+                >
+                  {content.title}
                 </a>
               </div>
             ))}

@@ -46,3 +46,13 @@ export const getServicesPageInfoService = async () => {
     return err.message;
   }
 };
+
+export const getContactPageInfoService = async () => {
+  try {
+    return await axiosInstance.get("contact/all");
+  } catch (err) {
+    console.log(err.message);
+
+    return err.message;
+  }
+};
