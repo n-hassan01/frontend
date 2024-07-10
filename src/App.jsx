@@ -8,6 +8,7 @@ import Projects from "./components/Projects";
 import Service from "./components/Services";
 import Skills from "./components/Skills";
 import Testimonials from "./components/Testimonials";
+import Works from "./components/Works";
 // Animation package
 import Aos from "aos";
 import "aos/dist/aos.css";
@@ -26,6 +27,7 @@ const App = () => {
       <Navbar />
       <Hero />
       <Skills />
+      <Works />
       <Service />
       <Projects />
       <Testimonials />

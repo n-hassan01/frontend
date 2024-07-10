@@ -81,3 +81,14 @@ export const getSkillsPageInfoService = async () => {
     return err.message;
   }
 };
+
+// works page services
+export const getWorksPageInfoService = async () => {
+  try {
+    return await axiosInstance.get("works/all");
+  } catch (err) {
+    console.log(err.message);
+
+    return err.message;
+  }
+};
