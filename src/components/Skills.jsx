@@ -1,8 +1,10 @@
+import { useEffect, useState } from "react";
 // import content
-import { createElement, useState } from "react";
 import { content } from "../Content";
 // import modal package
 import Modal from "react-modal";
+// api services
+import { getSkillsPageInfoService } from "../Services/apiServices";
 
 const customStyles = {
   content: {
@@ -33,6 +35,20 @@ const Skills = () => {
   function closeModal() {
     setIsOpen(false);
   }
+
+  const [pageInfo, setPageInfo] = useState([]);
+  useEffect(() => {
+    getSkillsPageInfoService()
+      .then((response) => {
+        setPageInfo(response.data.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching account details:", error);
+      });
+  }, []);
+
+  const title = pageInfo[0]?.pageTitle || "";
+  const subtitle = pageInfo[0]?.pageSubtitle || "";
 
   return (
     <section className="min-h-fit bg-bg_light_primary" id="skills">
@@ -69,15 +85,23 @@ const Skills = () => {
 
       {/* content */}
       <div className="md:container px-5  py-14">
-        <h2 className="title" data-aos="fade-down">
-          {skills.title}
+        <h2
+          className="title"
+          data-aos="fade-down"
+          style={{ textAlign: "center" }}
+        >
+          {title}
         </h2>
-        <h4 className="subtitle" data-aos="fade-down">
-          {skills.subtitle}
+        <h4
+          className="subtitle"
+          data-aos="fade-down"
+          style={{ textAlign: "center" }}
+        >
+          {subtitle}
         </h4>
         <br />
         <div className="flex flex-wrap gap-4 justify-center">
-          {skills.skills_content.map((skill, i) => (
+          {pageInfo.map((skill, i) => (
             <div
               key={i}
               data-aos="fade-up"
@@ -88,15 +112,15 @@ const Skills = () => {
             >
               <div>
                 <img
-                  src={skill.logo}
+                  src={skill.contentIcon}
                   alt="..."
                   className="w-10 group-hover:scale-125 duration-200"
                 />
               </div>
               <div>
-                <h6>{skill.name}</h6>
-                <p className="italic">{skill.para}</p>
-                <div
+                <h6>{skill.contentTitle}</h6>
+                <p className="italic">{skill.contentDescription}</p>
+                {/* <div
                   onClick={() => {
                     setSelectSkill(skill);
                     openModal();
@@ -104,7 +128,7 @@ const Skills = () => {
                   className="text-xl absolute top-3 right-3"
                 >
                   {createElement(skills.icon)}
-                </div>
+                </div> */}
               </div>
             </div>
           ))}

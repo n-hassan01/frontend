@@ -22,10 +22,18 @@ const Services = () => {
   return (
     <section id="services">
       <div className="md:container px-5 py-14">
-        <h2 className="title" data-aos="fade-down">
+        <h2
+          className="title"
+          data-aos="fade-down"
+          style={{ textAlign: "center" }}
+        >
           {title}
         </h2>
-        <h4 className="subtitle" data-aos="fade-down">
+        <h4
+          className="subtitle"
+          data-aos="fade-down"
+          style={{ textAlign: "center" }}
+        >
           {subtitle}
         </h4>
         <br />

@@ -29,10 +29,18 @@ const Hireme = () => {
   return (
     <section className="bg-bg_light_primary">
       <div className="md:container px-5 pt-14">
-        <h2 className="title" data-aos="fade-down">
+        <h2
+          className="title"
+          data-aos="fade-down"
+          style={{ textAlign: "center" }}
+        >
           {hireme.title}
         </h2>
-        <h4 className="subtitle" data-aos="fade-down">
+        <h4
+          className="subtitle"
+          data-aos="fade-down"
+          style={{ textAlign: "center" }}
+        >
           {hireme.subtitle}
         </h4>
         <br />

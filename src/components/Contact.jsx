@@ -84,10 +84,18 @@ const Contact = () => {
     <section className="bg-dark_primary text-white" id="contact">
       <Toaster />
       <div className="md:container px-5 py-14">
-        <h2 className="title !text-white" data-aos="fade-down">
+        <h2
+          className="title !text-white"
+          data-aos="fade-down"
+          style={{ textAlign: "center" }}
+        >
           {contact.title}
         </h2>
-        <h4 className="subtitle" data-aos="fade-down">
+        <h4
+          className="subtitle"
+          data-aos="fade-down"
+          style={{ textAlign: "center" }}
+        >
           {contact.subtitle}
         </h4>
         <br />
