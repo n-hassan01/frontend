@@ -92,3 +92,14 @@ export const getWorksPageInfoService = async () => {
     return err.message;
   }
 };
+
+// educations page services
+export const getEducationsPageInfoService = async () => {
+  try {
+    return await axiosInstance.get("educations/all");
+  } catch (err) {
+    console.log(err.message);
+
+    return err.message;
+  }
+};

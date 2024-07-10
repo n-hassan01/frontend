@@ -2,12 +2,13 @@
 import { useEffect } from "react";
 import Navbar from "./Layouts/Navbar";
 import Contact from "./components/Contact";
+import Educations from "./components/Educations";
 import Hero from "./components/Hero";
 import Hireme from "./components/Hireme";
-import Projects from "./components/Projects";
+// import Projects from "./components/Projects";
 import Service from "./components/Services";
 import Skills from "./components/Skills";
-import Testimonials from "./components/Testimonials";
+// import Testimonials from "./components/Testimonials";
 import Works from "./components/Works";
 // Animation package
 import Aos from "aos";
@@ -26,11 +27,12 @@ const App = () => {
     <div className="">
       <Navbar />
       <Hero />
+      <Educations />
       <Skills />
       <Works />
       <Service />
-      <Projects />
-      <Testimonials />
+      {/* <Projects /> */}
+      {/* <Testimonials /> */}
       <Hireme />
       <Contact />
       <footer className="p-3 text-center">
