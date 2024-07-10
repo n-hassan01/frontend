@@ -22,7 +22,7 @@ const Educations = () => {
   };
 
   return (
-    <section id="services">
+    <section id="educations">
       <div className="md:container px-5 py-14">
         <h2
           className="title"

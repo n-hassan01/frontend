@@ -61,7 +61,7 @@ const Works = () => {
   });
 
   return (
-    <section>
+    <section id="works">
       <div className="md:container px-5 pt-14">
         <h2
           className="title"

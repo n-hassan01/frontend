@@ -1,5 +1,5 @@
 // import components
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "./Layouts/Navbar";
 import Contact from "./components/Contact";
 import Educations from "./components/Educations";
@@ -14,6 +14,8 @@ import Works from "./components/Works";
 // Animation package
 import Aos from "aos";
 import "aos/dist/aos.css";
+// api services
+import { getMenuPageInfoService } from "./Services/apiServices";
 
 const App = () => {
   useEffect(() => {
@@ -24,23 +26,52 @@ const App = () => {
     });
   }, []);
 
+  const [pageInfo, setPageInfo] = useState([]);
+
+  useEffect(() => {
+    getMenuPageInfoService()
+      .then((response) => {
+        setPageInfo(response.data.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching account details:", error);
+      });
+  }, []);
+
+  const menus = [];
+  pageInfo.forEach((item) => {
+    if (item.url === "#home") {
+      menus.push(<Hero key="home" />);
+    }
+    if (item.url === "#about") {
+      menus.push(<Hireme key="about" />);
+    }
+    if (item.url === "#educations") {
+      menus.push(<Educations key="educations" />);
+    }
+    if (item.url === "#skills") {
+      menus.push(<Skills key="skills" />);
+    }
+    if (item.url === "#works") {
+      menus.push(<Works key="works" />);
+    }
+    if (item.url === "#services") {
+      menus.push(<Service key="services" />);
+    }
+    if (item.url === "#contact") {
+      menus.push(<Contact key="contact" />);
+    }
+  });
+
+  console.log(menus);
+
   return (
     <div className="">
-      <Navbar />
-      <Hero />
-      <Educations />
-      <Skills />
-      <Works />
-      <Service />
-      {/* <Projects /> */}
-      {/* <Testimonials /> */}
-      <Hireme />
-      <Contact />
-      <Footer />
-      {/* <footer className="p-3 text-center">
-        <h6 className="mb-3">JOHN ALEX</h6>
-        <p>codeaprogram © All CopyRights Reserved 2022</p>
-      </footer> */}
+      <Navbar></Navbar>
+      {menus.map((item, i) => (
+        <div key={i}>{item}</div>
+      ))}
+      <Footer></Footer>
     </div>
   );
 };

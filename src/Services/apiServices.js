@@ -114,3 +114,14 @@ export const getFooterPageInfoService = async () => {
     return err.message;
   }
 };
+
+// menu page services
+export const getMenuPageInfoService = async () => {
+  try {
+    return await axiosInstance.get("menus/all");
+  } catch (err) {
+    console.log(err.message);
+
+    return err.message;
+  }
+};
