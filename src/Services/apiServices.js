@@ -103,3 +103,14 @@ export const getEducationsPageInfoService = async () => {
     return err.message;
   }
 };
+
+// footer page services
+export const getFooterPageInfoService = async () => {
+  try {
+    return await axiosInstance.get("footer/all");
+  } catch (err) {
+    console.log(err.message);
+
+    return err.message;
+  }
+};

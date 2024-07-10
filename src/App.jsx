@@ -9,6 +9,7 @@ import Hireme from "./components/Hireme";
 import Service from "./components/Services";
 import Skills from "./components/Skills";
 // import Testimonials from "./components/Testimonials";
+import Footer from "./components/Footer";
 import Works from "./components/Works";
 // Animation package
 import Aos from "aos";
@@ -35,10 +36,11 @@ const App = () => {
       {/* <Testimonials /> */}
       <Hireme />
       <Contact />
-      <footer className="p-3 text-center">
+      <Footer />
+      {/* <footer className="p-3 text-center">
         <h6 className="mb-3">JOHN ALEX</h6>
         <p>codeaprogram © All CopyRights Reserved 2022</p>
-      </footer>
+      </footer> */}
     </div>
   );
 };
