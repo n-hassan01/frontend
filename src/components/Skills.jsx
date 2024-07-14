@@ -37,15 +37,17 @@ const Skills = () => {
   useEffect(() => {
     getSkillsPageInfoService()
       .then((response) => {
-        setPageInfo(response.data.data);
+        if (response.data.statusCode === 200) {
+          setPageInfo(response.data.data);
+        }
       })
       .catch((error) => {
         console.error("Error fetching account details:", error);
       });
   }, []);
 
-  const title = pageInfo[0]?.pageTitle || "";
-  const subtitle = pageInfo[0]?.pageSubtitle || "";
+  const title = pageInfo[0]?.pageTitle || "Skills";
+  const subtitle = pageInfo[0]?.pageSubtitle || "what I know";
 
   return (
     <section className="min-h-fit bg-bg_light_primary" id="skills">

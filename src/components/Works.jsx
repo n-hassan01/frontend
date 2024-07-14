@@ -24,7 +24,9 @@ const Works = () => {
   useEffect(() => {
     getWorksPageInfoService()
       .then((response) => {
-        setPageInfo(response.data.data);
+        if (response.data.statusCode === 200) {
+          setPageInfo(response.data.data);
+        }
       })
       .catch((error) => {
         console.error("Error fetching account details:", error);
@@ -32,11 +34,10 @@ const Works = () => {
   }, []);
 
   const works = {
-    title: pageInfo.pageInfo?.title || "",
-    subtitle: pageInfo.pageInfo?.subtitle || "",
+    title: pageInfo.pageInfo?.title || "Works",
+    subtitle: pageInfo.pageInfo?.subtitle || "what I have done",
     contents: pageInfo.contentInfo || [],
   };
-  console.log(works);
 
   let updatedIcons = works.contents.map((media) => {
     if (media.icon === "email") {

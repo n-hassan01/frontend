@@ -27,11 +27,12 @@ const App = () => {
   }, []);
 
   const [pageInfo, setPageInfo] = useState([]);
-
   useEffect(() => {
     getMenuPageInfoService()
       .then((response) => {
-        setPageInfo(response.data.data);
+        if (response.data.statusCode === 200) {
+          setPageInfo(response.data.data);
+        }
       })
       .catch((error) => {
         console.error("Error fetching account details:", error);
@@ -62,8 +63,6 @@ const App = () => {
       menus.push(<Contact key="contact" />);
     }
   });
-
-  console.log(menus);
 
   return (
     <div className="">

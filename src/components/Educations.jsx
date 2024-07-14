@@ -8,7 +8,9 @@ const Educations = () => {
   useEffect(() => {
     getEducationsPageInfoService()
       .then((response) => {
-        setPageInfo(response.data.data);
+        if (response.data.statusCode === 200) {
+          setPageInfo(response.data.data);
+        }
       })
       .catch((error) => {
         console.error("Error fetching account details:", error);
@@ -16,8 +18,8 @@ const Educations = () => {
   }, []);
 
   const educations = {
-    title: pageInfo.pageInfo?.title || "",
-    subtitle: pageInfo.pageInfo?.subtitle || "",
+    title: pageInfo.pageInfo?.title || "Educations",
+    subtitle: pageInfo.pageInfo?.subtitle || "what I learn",
     contents: pageInfo.contentInfo || [],
   };
 
@@ -55,8 +57,6 @@ const Educations = () => {
                 alt="..."
                 className="mx-auto"
               />
-              {/* <img src={education_logo} alt="..." className="mx-auto" /> */}
-              {/* <FontAwesomeIcon icon="fa-sharp fa-solid fa-gear" /> */}
               <h6 className="my-3">{content.title}</h6>
               <p className="leading-7">{content.description}</p>
             </div>

@@ -9,28 +9,29 @@ const Hero = () => {
   useEffect(() => {
     getHeroPageInfoService()
       .then((response) => {
-        setPageInfo(response.data.data[0]);
+        if (response.data.statusCode === 200) {
+          setPageInfo(response.data.data[0]);
+        }
       })
       .catch((error) => {
         console.error("Error fetching account details:", error);
       });
   }, []);
-  console.log(pageInfo);
 
   const hero = {
-    title: pageInfo.designation || "",
-    firstName: pageInfo.heroCompositeKey?.firstName || "", // Using optional chaining
+    title: pageInfo.designation || "Profession",
+    firstName: pageInfo.heroCompositeKey?.firstName || "User", // Using optional chaining
     lastName: pageInfo.heroCompositeKey?.lastName || "", // Using optional chaining
     btnText: "Hire Me",
     image: Hero_person,
     hero_content: [
       {
         count: pageInfo.experienceCount || 0,
-        text: pageInfo.experienceDescription || "",
+        text: pageInfo.experienceDescription || "Experience Description",
       },
       {
         count: pageInfo.projectCount || 0,
-        text: pageInfo.projectDescription || "",
+        text: pageInfo.projectDescription || "Project Description",
       },
     ],
   };

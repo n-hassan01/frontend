@@ -10,7 +10,9 @@ const Hireme = () => {
   useEffect(() => {
     getHiremePageInfoService()
       .then((response) => {
-        setPageInfo(response.data.data);
+        if (response.data.statusCode === 200) {
+          setPageInfo(response.data.data);
+        }
       })
       .catch((error) => {
         console.error("Error fetching account details:", error);
@@ -19,7 +21,7 @@ const Hireme = () => {
 
   const hireme = {
     title: pageInfo[0]?.pageTitle || "About me",
-    subtitle: pageInfo[0]?.pageSubtitle || "About me",
+    subtitle: pageInfo[0]?.pageSubtitle || "who I am",
     image1: Hireme_person,
     image2: Hireme_person2,
     para: pageInfo[0]?.description || "",

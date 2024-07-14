@@ -9,15 +9,17 @@ const Services = () => {
   useEffect(() => {
     getServicesPageInfoService()
       .then((response) => {
-        setPageInfo(response.data.data);
+        if (response.data.statusCode === 200) {
+          setPageInfo(response.data.data);
+        }
       })
       .catch((error) => {
         console.error("Error fetching account details:", error);
       });
   }, []);
 
-  const title = pageInfo[0]?.pageTitle || "";
-  const subtitle = pageInfo[0]?.pageSubtitle || "";
+  const title = pageInfo[0]?.pageTitle || "Services";
+  const subtitle = pageInfo[0]?.pageSubtitle || "what I offer";
 
   return (
     <section id="services">
@@ -48,9 +50,7 @@ const Services = () => {
               // >
               style={{ maxHeight: "600px", overflow: "auto " }}
             >
-              {/* <img src={content.logo} alt="..." className="mx-auto" /> */}
               <img src={services_logo1} alt="..." className="mx-auto" />
-              {/* <FontAwesomeIcon icon="fa-sharp fa-solid fa-gear" /> */}
               <h6 className="my-3">{content.contentTitle}</h6>
               <p className="leading-7">{content.contentDescription}</p>
             </div>

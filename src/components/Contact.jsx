@@ -45,7 +45,9 @@ const Contact = () => {
   useEffect(() => {
     getContactPageInfoService()
       .then((response) => {
-        setPageInfo(response.data.data);
+        if (response.data.statusCode === 200) {
+          setPageInfo(response.data.data);
+        }
       })
       .catch((error) => {
         console.error("Error fetching account details:", error);
@@ -53,8 +55,8 @@ const Contact = () => {
   }, []);
 
   const contact = {
-    title: pageInfo.pageInfo?.title || "",
-    subtitle: pageInfo.pageInfo?.subtitle || "",
+    title: pageInfo.pageInfo?.title || "Contact",
+    subtitle: pageInfo.pageInfo?.subtitle || "get In touch",
     social_media: pageInfo.contentInfo || [],
   };
 
