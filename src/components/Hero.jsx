@@ -55,7 +55,9 @@ const Hero = () => {
           <h2>{pageInfo.designation}</h2>
           <br />
           <div className="flex justify-end">
-            <button className="btn">{hero.btnText}</button>
+            <button className="btn">
+              <a href={"#contact"}>{hero.btnText}</a>
+            </button>
           </div>
           <div className="flex flex-col gap-10 mt-10">
             {hero.hero_content.map((content, i) => (

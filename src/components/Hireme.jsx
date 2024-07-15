@@ -25,7 +25,8 @@ const Hireme = () => {
     image1: Hireme_person,
     image2: Hireme_person2,
     para: pageInfo[0]?.description || "",
-    btnText: "Hire Me",
+    btnText: "Download CV",
+    btnAction: `../../src/assets/cv/${pageInfo[0]?.cv}` || "",
   };
 
   return (
@@ -67,7 +68,14 @@ const Hireme = () => {
             <p className="leading-7">{hireme.para}</p>
             <br />
             <button className="btn bg-dark_primary text-white">
-              {hireme.btnText}
+              <a
+                href={hireme.btnAction}
+                download={pageInfo[0]?.cv || ""}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {hireme.btnText}
+              </a>
             </button>
           </div>
         </div>
